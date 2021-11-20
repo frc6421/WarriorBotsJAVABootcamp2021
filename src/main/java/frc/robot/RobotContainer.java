@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -54,8 +53,8 @@ public class RobotContainer {
     driveSubsystem.setDefaultCommand(
       new RunCommand(() -> 
         driveSubsystem.setArcadeDrive(
-          driverController.getY(GenericHID.Hand.kLeft) * DriveConstants.NERF_RATE, // Speed Back/Forth
-          driverController.getX(GenericHID.Hand.kRight) * DriveConstants.NERF_RATE, // Turn amount
+          driverController.getY(GenericHID.Hand.kLeft) * OIConstants.NERF_RATE, // Speed Back/Forth
+          driverController.getX(GenericHID.Hand.kRight) * OIConstants.NERF_RATE, // Turn amount
           true), //Square inputs
         driveSubsystem));
 
@@ -74,8 +73,8 @@ public class RobotContainer {
 
     arcadeDriveStopSquaringButton.whenPressed(new RunCommand(() ->
       driveSubsystem.setArcadeDrive(
-        driverController.getY(GenericHID.Hand.kLeft) * DriveConstants.NERF_RATE,
-        driverController.getX(GenericHID.Hand.kRight) * DriveConstants.NERF_RATE, 
+        driverController.getY(GenericHID.Hand.kLeft) * OIConstants.NERF_RATE,
+        driverController.getX(GenericHID.Hand.kRight) * OIConstants.NERF_RATE, 
         false), 
       driveSubsystem));
   }

@@ -15,6 +15,9 @@ package frc.robot;
 public final class Constants {
   public final class OIConstants{
     public static final int DRIVER_CONTROLLER_PORT = 0;
+
+    public static final double NERF_RATE = 0.5; // TODO adjust as needed
+    // TODO Add other nerf rates if needed
   }
 
   public final class DriveConstants{
@@ -27,9 +30,5 @@ public final class Constants {
     public static final double NEUTRAL_DEADBAND = 0.02;
 
     public static final double RAMP_RATE_DRIVE = 1.0; // TODO adjust as needed for each robot
-    
-    public static final double NERF_RATE = 0.5; // TODO adjust as needed
-    // TODO Add other nerf rates if needed
-
   }
 }
