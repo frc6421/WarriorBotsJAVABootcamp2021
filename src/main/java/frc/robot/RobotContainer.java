@@ -7,11 +7,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutonomousForwardCircleCommand;
 import frc.robot.commands.AutonomousForwardCommand;
+import frc.robot.commands.AutonomousReverseCircleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -32,6 +36,9 @@ public class RobotContainer {
   
   // The robot's commands are defined here...
     private final AutonomousForwardCommand autonomousForwardCommand;
+    private final AutonomousForwardCircleCommand autonomousForwardCircleCommand;
+    private final AutonomousReverseCircleCommand autonomousReverseCircleCommand;
+    private final SendableChooser<Command> chooser;
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -40,7 +47,16 @@ public class RobotContainer {
     driverController = new XboxController(OIConstants.DRIVER_CONTROLLER_PORT);
 
     autonomousForwardCommand = new AutonomousForwardCommand(driveSubsystem);
+    autonomousForwardCircleCommand = new AutonomousForwardCircleCommand(driveSubsystem);
+    autonomousReverseCircleCommand = new AutonomousReverseCircleCommand(driveSubsystem);
 
+    chooser = new SendableChooser<>();
+    chooser.setDefaultOption("Drive Forward", autonomousForwardCommand);
+    chooser.addOption("Drive Forward Circle", autonomousForwardCircleCommand);
+    chooser.addOption("Drive Reverse Circle", autonomousReverseCircleCommand);
+    chooser.addOption("Do nothing", null);
+
+    SmartDashboard.putData(chooser);
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -90,6 +106,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autonomousForwardCommand;
+    return chooser.getSelected();
   }
 }
