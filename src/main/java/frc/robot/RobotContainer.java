@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutonomousForwardCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -30,12 +31,15 @@ public class RobotContainer {
     private JoystickButton arcadeDriveStopSquaringButton;
   
   // The robot's commands are defined here...
+    private final AutonomousForwardCommand autonomousForwardCommand;
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem = new DriveSubsystem();
 
     driverController = new XboxController(OIConstants.DRIVER_CONTROLLER_PORT);
+
+    autonomousForwardCommand = new AutonomousForwardCommand(driveSubsystem);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -86,6 +90,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return autonomousForwardCommand;
   }
 }
